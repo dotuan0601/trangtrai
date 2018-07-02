@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Eloquent\Model;
 
-class CreateFrMenuTable extends Migration {
+class CreateProductTable extends Migration {
 
     /**
      * Run the migrations.
@@ -14,10 +14,14 @@ class CreateFrMenuTable extends Migration {
     public function up()
     {
         Model::unguard();
-        Schema::create('frmenu',function(Blueprint $table){
+        Schema::create('product',function(Blueprint $table){
             $table->increments("id");
             $table->string("name")->nullable();
-            $table->string("parent_id")->nullable();
+            $table->string("link")->nullable();
+            $table->string("image")->nullable();
+            $table->tinyInteger("active")->default(1)->nullable();
+            $table->decimal("priority", 15, 2)->nullable();
+            $table->tinyInteger("is_feature")->default(0)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,7 +34,7 @@ class CreateFrMenuTable extends Migration {
      */
     public function down()
     {
-        Schema::drop('frmenu');
+        Schema::drop('product');
     }
 
 }
